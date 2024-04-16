@@ -5,18 +5,30 @@
   "main": "index.js",
   "scripts": {
     "format": "prettier --write \"src/**/*.ts\"",
-    "dev": " nodemon dist/index.js"
+    "dev": "tsc -b && nodemon dist/index.js"
   },
   "author": "Shrijan",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.12.1",
-    "@types/express": "^4.17.21",
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^2.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "nodemon": "^3.1.0",
     "prisma": "^5.12.1"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.11",
     "@types/node": "^20.12.7",
+    "multer": "^1.4.5-lts.1",
     "prettier": "^3.2.5"
   }
 }
