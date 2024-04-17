@@ -29,49 +29,64 @@ model TimeSlot {
 }
 
 model Doctor {
-  id                 Int        @id @default(autoincrement())
+  id                 Int           @id @default(autoincrement())
   name               String
   consultationCharge String
   profilePhoto       String
-  email              String     @unique
+  email              String        @unique
   phone              String
-  department         Dept       @relation(fields: [departmentId], references: [id])
+  department         Dept          @relation(fields: [departmentId], references: [id])
   shortDescription   String
   longDescription    String
   availability       TimeSlot[]
-  departmentId Int
+  departmentId       Int
+  Appointment        Appointment[]
 }
 
 model Dept {
-  id     Int      @id @default(autoincrement())
-  name   String
-  Doctor Doctor[]
+  id          Int           @id @default(autoincrement())
+  name        String
+  Doctor      Doctor[]
+  Appointment Appointment[]
 }
 
 model MedCategory {
-  id        Int     @id @default(autoincrement())
-  category  String  @unique
+  id        Int        @id @default(autoincrement())
+  category  String     @unique
   medicines Medicine[]
 }
 
 model Medicine {
-  id        Int       @id @default(autoincrement())
-  name      String
-  category  MedCategory @relation(fields: [categoryId], references: [id])
+  id         Int         @id @default(autoincrement())
+  name       String
+  category   MedCategory @relation(fields: [categoryId], references: [id])
   categoryId Int
-  mfg       DateTime
-  exp       DateTime
-  medImage  String
-  prescReq  Boolean   @default(false)
-  inStock   Boolean   @default(true)
-  price     String
+  mfg        DateTime
+  exp        DateTime
+  medImage   String
+  prescReq   Boolean     @default(false)
+  inStock    Boolean     @default(true)
+  price      String
 }
 
 model User {
-  id            Int      @id @default(autoincrement())
-  username      String   @unique
-  password      String
-  email         String   @unique
-  profilePhoto  String?
-  refreshToken  String?
+  id           Int           @id @default(autoincrement())
+  username     String        @unique
+  password     String
+  email        String        @unique
+  profilePhoto String?
+  refreshToken String?
+  Appointment  Appointment[]
+}
+
+model Appointment {
+  id            Int    @id @default(autoincrement())
+  doctor        Doctor @relation(fields: [doctorID], references: [id])
+  doctorID      Int
+  user          User   @relation(fields: [userID], references: [id])
+  userID        Int
+  timeSlot      String
+  dept          Dept   @relation(fields: [deptID], references: [id])
+  deptID        Int
+  paymentStatus String @default("pending")
 }
