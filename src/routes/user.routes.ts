@@ -12,7 +12,8 @@ import {
   refreshAccessToken,
   updateEmail,
   updateUserProfile,
-  bookAppointment
+  bookAppointment,
+  getAppointments,
 } from "../controllers/user.controller";
 const router = Router();
 
@@ -28,7 +29,7 @@ router.route("/refresh-token").post(refreshAccessToken);
 
 router.route("/logout").post(logoutUser);
 
-router.route("/getDoctors").get( getDoctors);
+router.route("/getDoctors").get(getDoctors);
 
 router.route("/getDepartment").get(getDepartment);
 
@@ -36,9 +37,11 @@ router.route("/update-email").put(updateEmail);
 
 router
   .route("/updateUserProfile")
-  .put(upload.single("profile"),  updateUserProfile);
-  router.route("/getSlots").get( getAvailableSlot);
+  .put(upload.single("profile"), updateUserProfile);
+router.route("/getSlots").get(getAvailableSlot);
 
-  router.route("/book-appointment").post(bookAppointment);
+router.route("/book-appointment").post(bookAppointment);
+
+router.route("/get-appointments").get(getAppointments);
 
 export default router;
