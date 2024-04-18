@@ -84,7 +84,6 @@ const SignUpUser = asyncHandler(async (req, res) => {
   }
 
   const encrytedPassword = await bcrypt.hash(password, 10);
-  console.log(encrytedPassword);
   const user = await prisma.user.create({
     data: {
       profilePhoto: "",
